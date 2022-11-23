@@ -11,6 +11,7 @@
 
     /*user-defined includes*/
 #include "../header/ksimGetInput.h"
+#include "../header/ksimTokenize.h"
 
     /*main*/
 int main()
@@ -20,8 +21,15 @@ int main()
     std::string *bufferArgv = NULL; //tokenized user commands
     int bufferArgc = 0;             //number of user commands, used for freeing
 
-    while (1) {
+    //while (1) {
         ksimGetInput(ksimTicks, &buffer);
-        std::cout << buffer << std::endl;
-    }
+
+        ksimTokenize(buffer, &bufferArgv, &bufferArgc);
+
+        for (int i = 0; i < bufferArgc; i++) {
+            std::cout << bufferArgv[i] << std::endl;
+        }
+
+        //delete(bufferArgv);
+    //}
 }
