@@ -30,6 +30,6 @@ int main()
             std::cout << bufferArgv[i] << std::endl;
         }
 
-        //delete(bufferArgv);
+        delete(bufferArgv);
     //}
 }
