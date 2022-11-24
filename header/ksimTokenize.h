@@ -9,4 +9,4 @@
 #pragma once
 
     /*function prototype*/
-void ksimTokenize(std::string buffer, std::string **bufferArgv, int *bufferArgc);
+void ksimTokenize(std::string buffer, std::vector<std::string> bufferArgv);
