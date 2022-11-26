@@ -9,4 +9,4 @@
 
 #include <string>   //std::string
 
-void ksimgetinput(int ticks, std::string &buffer);
+void get_input(int ticks, std::string &buffer);

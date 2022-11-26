@@ -7,7 +7,7 @@
 #include <string>   //std::string   length()    find()  substr()
 #include <vector>   //std::vector   push_back()
 
-void tokenize(std::string buffer, std::vector<std::string> bufferArgv)
+void tokenize(std::string buffer, std::vector<std::string> &bufferArgv)
 {
         //initialize variables
     int start = 0;

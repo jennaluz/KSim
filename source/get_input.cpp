@@ -10,7 +10,7 @@
 
 #include "../header/get_input.h"
 
-void ksimgetinput(int ticks, std::string &buffer)
+void get_input(int ticks, std::string &buffer)
 {
         //print user prompt
     std::cout << "ksim-" << std::setw(9) << std::setfill('0') << ticks % 1000000000 << "> ";

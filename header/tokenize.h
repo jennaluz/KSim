@@ -10,4 +10,4 @@
 #include <string>   //std::string
 #include <vector>   //std::vector
 
-void tokenize(std::string buffer, std::vector<std::string> bufferArgv);
+void tokenize(std::string buffer, std::vector<std::string> &bufferArgv);
