@@ -9,7 +9,7 @@
 #  to clean:
 
 CC = g++
-CFLAGS = -Wall
+CFLAGS = -std=c++11 -Wall
 
 HDRS := $(wildcard header/*.h)
 SRCS := $(wildcard source/*.cpp)
