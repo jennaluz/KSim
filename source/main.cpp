@@ -20,6 +20,15 @@ int main()
     std::vector<std::string> bufferArgv;    //tokenized user commands
     int bufferArgc = 0;                     //amount of user commands
 
+    std::string opcodes[7] {
+        "exit",
+        "add",
+        "step",
+        "wait",
+        "io-event",
+        "query",
+        "release"
+    };
 
     while (1) {
         get_input(ticks, buffer);
@@ -27,48 +36,74 @@ int main()
         tokenize(buffer, bufferArgv, bufferArgc);
 
         std::string opcode = bufferArgv[0];
+        int idxOpcodes = -1;
 
-        if (opcode == "exit") {
+        for (int i = 0; i < 7; i++) {
+            if (opcode == opcodes[i]) {
+                idxOpcodes = i;
+                break;
+            }
+        }
+
+        switch (idxOpcodes) {
+        case 0:     //exit
             if (bufferArgc > 1) {
-                //throw
-                continue;
+                std::cout << "Opcode \"exit\" requires no operands." << std::endl;
+                break;
             }
 
             bufferArgv.clear();
-            break;
-        } else if (opcode == "add") {
-            if (bufferArgc < 2) {
-                //throw?
-                continue;
+            return 0;
+        case 1:     //add
+            if (bufferArgc != 2) {
+                std::cout << "Opcode \"add\" requires 1 operand." << std::endl;
+                break;
             }
 
             ticks += ksim.add(ticks, bufferArgv[1]);
-        } else if(opcode == "wait") {
-            if (bufferArgc < 2) {
-                continue;
+            break;
+        case 2:     //step
+            if (bufferArgc > 1) {
+                std::cout << "Opcode \"step\" requires no operands." << std::endl;
+                break;
+            }
+
+            ticks += ksim.step(ticks);
+            break;
+        case 3:     //wait
+            if (bufferArgc != 2) {
+                std::cout << "Opcode \"wait\" requires 1 operand." << std::endl;
+                break;
             }
 
             ticks += ksim.wait(ticks, bufferArgv[1]);
-        } else if(opcode == "io-event") {
+            break;
+        case 4:     //io-event
             if (bufferArgc != 2) {
-                //throw
-                continue;
+                std::cout << "Opcode \"io-event\" requires 1 operand." << std::endl;
+                break;
             }
 
             ticks += ksim.io_event(bufferArgv[1]);
-        } else if (opcode == "query") {
-            if (bufferArgc < 2) {
-                //throw?
-                continue;
+            break;
+        case 5:     //query
+            if (bufferArgc != 2) {
+                std::cout << "Opcode \"query\" requires 1 operand." << std::endl;
+                break;
             }
 
             ticks += ksim.query(bufferArgv[1]);
-        } else if (opcode == "step") {
-            ticks += ksim.step(ticks);
-        } else if (opcode == "release") {
+            break;
+        case 6:     //release
+            if (bufferArgc > 1) {
+                std::cout << "Opcode \"release\" requires no operands." << std::endl;
+                break;
+            }
+
             ticks += ksim.release(ticks);
-        } else {
-            //throw?
+            break;
+        default:    //invalid
+            std::cout << "\"" << opcode << "\" is an invalid opcode." << std::endl;
         }
 
         bufferArgv.clear();
