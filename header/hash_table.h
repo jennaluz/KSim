@@ -20,6 +20,7 @@ struct HashTable_t {
         //constructor
     HashTable_t();
         //destructor
+    ~HashTable_t();
         //methods
     int hash(std::string key);
     bool find(std::string key);

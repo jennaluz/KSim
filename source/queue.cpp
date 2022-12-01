@@ -16,6 +16,21 @@ Queue_t::Queue_t()
     tail = nullptr;
 }
 
+/*destructor*/
+Queue_t::~Queue_t()
+{
+    Node_t* tmpPrev = nullptr;
+
+    while (head != nullptr) {
+        tmpPrev = head;
+        head = head->queueNext;
+
+        delete tmpPrev;
+    }
+
+    tail = head;
+}
+
 /*
  * called by Dispatcher_t add() method.
  * adds a new element to the end of stateQueue[NEW].

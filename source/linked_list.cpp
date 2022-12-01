@@ -24,6 +24,21 @@ LinkedList_t::LinkedList_t(Node_t *element)
     tail = element;
 }
 
+/*destructor*/
+LinkedList_t::~LinkedList_t()
+{
+    Node_t* tmpPrev = nullptr;
+
+    while (head != nullptr) {
+        tmpPrev = head;
+        head = head->processTableNext;
+
+        delete tmpPrev;
+    }
+
+    tail = head;
+}
+
 /*
  * searches through linked list to find Node_t object with matching key.
  * returns true if found and false if not found.

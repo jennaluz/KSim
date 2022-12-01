@@ -22,6 +22,16 @@ HashTable_t::HashTable_t()
     }
 }
 
+/*destructor*/
+HashTable_t::~HashTable_t()
+{
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (table[i] != nullptr) {
+            delete table[i];
+        }
+    }
+}
+
 /*
  * called by Dispatcher_t add() method.
  * hashes a string and returns an index into the hash table.

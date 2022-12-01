@@ -16,3 +16,9 @@ Node_t::Node_t(std::string key, Process_t *value)
     this->queueNext = nullptr;
     this->processTableNext = nullptr;
 }
+
+/*destructor*/
+Node_t::~Node_t()
+{
+    delete this->value;
+}

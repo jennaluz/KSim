@@ -18,4 +18,6 @@ struct Node_t {
     Node_t *processTableNext;
         //constructor
     Node_t(std::string key, Process_t *value);
+        //destructor
+    ~Node_t();
 };

@@ -17,6 +17,8 @@ struct LinkedList_t {
         //constructor
     LinkedList_t();
     LinkedList_t(Node_t *element);
+        //destructor
+    ~LinkedList_t();
         //methods
     bool find(std::string key);
     void add(Node_t *newNode);

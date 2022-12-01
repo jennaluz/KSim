@@ -118,6 +118,7 @@ int Dispatcher_t::wait(int ticks, std::string ioEvent)
     tmp = stateQueue[RUNNING].remove();
 
     tmp->value->state = "\"Blocked\"\n\t\twaiting on device " + std::to_string(blockEvent - 3) + " since tick " + std::to_string(ticks % 1000000000);
+    tmp->value->lastRun = ticks;
     stateQueue[blockEvent].add(tmp);
 
     std::cout << "Process \"" << tmp->key << "\" went from Running to Blocked." << std::endl;
@@ -126,7 +127,10 @@ int Dispatcher_t::wait(int ticks, std::string ioEvent)
 }
 
 /*
-*/
+ * simulates that specified io-device X is ready.
+ * moves all processes waiting on the event from BLOCKED_X queue to READY queue.
+ * 1 tick passes.
+ */
 int Dispatcher_t::io_event(std::string ioEvent)
 {
     if (ioEvent.size() != 1) {
@@ -142,12 +146,14 @@ int Dispatcher_t::io_event(std::string ioEvent)
         return 1;
     }
 
-    tmp = stateQueue[unblockEvent].remove();
+    while (stateQueue[unblockEvent].head != nullptr) {
+        tmp = stateQueue[unblockEvent].remove();
 
-    tmp->value->state = "\"Ready\"";
-    stateQueue[READY].add(tmp);
+        tmp->value->state = "\"Ready\"";
+        stateQueue[READY].add(tmp);
 
-    std::cout << "Process \"" << tmp->key << "\" was moved from Blocked (iodev=" << unblockEvent - 3 << ") to Ready." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" was moved from Blocked (iodev=" << unblockEvent - 3 << ") to Ready." << std::endl;
+    }
 
     return 1;
 }
@@ -155,6 +161,7 @@ int Dispatcher_t::io_event(std::string ioEvent)
 /*
  * prints the pid and state of the user-specified process.
  * if user enters "query all" then all processes are printed.
+ * no ticks pass.
  */
 int Dispatcher_t::query(std::string pid)
 {
@@ -169,7 +176,9 @@ int Dispatcher_t::query(std::string pid)
 }
 
 /*
- *
+ * moves the currently running process from the RUNNING queue to the EXIT queue.
+ * if no processes are currently running, no ticks will pass.
+ *  otherwise, 32 ticks are passed.
  */
 int Dispatcher_t::release(int ticks)
 {
