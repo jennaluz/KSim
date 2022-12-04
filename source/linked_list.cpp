@@ -24,21 +24,6 @@ LinkedList_t::LinkedList_t(Node_t *element)
     tail = element;
 }
 
-/*destructor*/
-LinkedList_t::~LinkedList_t()
-{
-    Node_t* tmpPrev = nullptr;
-
-    while (head != nullptr) {
-        tmpPrev = head;
-        head = head->processTableNext;
-
-        delete tmpPrev;
-    }
-
-    tail = head;
-}
-
 /*
  * searches through linked list to find Node_t object with matching key.
  * returns true if found and false if not found.
@@ -75,6 +60,11 @@ void LinkedList_t::add(Node_t *newNode)
  */
 void LinkedList_t::remove(std::string key)
 {
+    if (head->key == key) {
+        head = head->processTableNext;
+        return;
+    }
+
     Node_t* tmp = head;
     Node_t* tmpPrev = tmp;
 
@@ -95,7 +85,7 @@ void LinkedList_t::remove(std::string key)
  * called by HashTable_t print() method.
  * prints the pid and state of the value of the key parameter.
  */
-bool LinkedList_t::print(std::string key)
+void LinkedList_t::print(std::string key)
 {
     Node_t *tmp = head;
 
@@ -105,13 +95,13 @@ bool LinkedList_t::print(std::string key)
             std::cout << "\tid: \"" + tmp->value->pid + "\"\n";
             std::cout << "\tstate: " + tmp->value->state + "\n";
             std::cout << "***\n";
-            return true;
+            return;
         }
 
         tmp = tmp->processTableNext;
     }
 
-    return false;
+    return;
 }
 
 /*

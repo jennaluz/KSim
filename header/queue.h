@@ -21,4 +21,5 @@ struct Queue_t {
         //methods
     void add(Node_t *newNode);
     Node_t* remove();
+    void print();
 };

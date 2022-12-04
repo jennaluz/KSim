@@ -87,12 +87,16 @@ int main()
             ticks += ksim.io_event(bufferArgv[1]);
             break;
         case 5:     //query
-            if (bufferArgc != 2) {
-                std::cout << "Opcode \"query\" requires 1 operand." << std::endl;
+            if (bufferArgc > 2) {
+                std::cout << "Opcode \"query\" requires 1 or no operand." << std::endl;
                 break;
             }
 
-            ticks += ksim.query(bufferArgv[1]);
+            if (bufferArgc == 2)
+                ticks += ksim.query(bufferArgv[1]);
+            else
+                ticks += ksim.query("all");
+
             break;
         case 6:     //release
             if (bufferArgc > 1) {

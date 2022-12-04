@@ -45,7 +45,7 @@ int Dispatcher_t::step(int ticks)
     while (stateQueue[EXIT].head != nullptr) {
         tmp = stateQueue[EXIT].remove();
         processTable.remove(tmp);
-        std::cout << "Process \"" << tmp->key << "\" was banished to the void." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" is banished to the void." << std::endl;
         delete tmp;
     }
 
@@ -56,7 +56,7 @@ int Dispatcher_t::step(int ticks)
         tmp->value->state = "\"Ready\"";
         stateQueue[READY].add(tmp);
 
-        std::cout << "Process \"" << tmp->key << "\" was moved from New to Ready." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" moved from New to Ready." << std::endl;
     }
 
         //advance at most one process from each I/O device in the BLOCKED queue to the READY queue
@@ -68,7 +68,7 @@ int Dispatcher_t::step(int ticks)
                 tmp->value->state = "\"Ready\"";
                 stateQueue[READY].add(tmp);
 
-                std::cout << "Process \"" << tmp->key << "\" was moved from Blocked (iodev=" << i - 3 << ") to Ready." << std::endl;
+                std::cout << "Process \"" << tmp->key << "\" moved from Blocked (iodev=" << i - 3 << ") to Ready." << std::endl;
             }
         }
     }
@@ -81,7 +81,7 @@ int Dispatcher_t::step(int ticks)
         tmp->value->lastRun = ticks;
         stateQueue[READY].add(tmp);
 
-        std::cout << "Process \"" << tmp->key << "\" was moved from Running to Ready." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" moved from Running to Ready." << std::endl;
     }
 
         //move the process that has been waiting the most time in the READY queue to the RUNNING queue
@@ -91,7 +91,7 @@ int Dispatcher_t::step(int ticks)
         tmp->value->state = "\"Running\"";
         stateQueue[RUNNING].add(tmp);
 
-        std::cout << "Process \"" << tmp->key << "\" was moved from Ready to Running." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" moved from Ready to Running." << std::endl;
     }
 
     return 256;
@@ -121,7 +121,7 @@ int Dispatcher_t::wait(int ticks, std::string ioEvent)
     tmp->value->lastRun = ticks;
     stateQueue[blockEvent].add(tmp);
 
-    std::cout << "Process \"" << tmp->key << "\" went from Running to Blocked." << std::endl;
+    std::cout << "Process \"" << tmp->key << "\" moved from Running to Blocked." << std::endl;
 
     return 1;
 }
@@ -152,7 +152,7 @@ int Dispatcher_t::io_event(std::string ioEvent)
         tmp->value->state = "\"Ready\"";
         stateQueue[READY].add(tmp);
 
-        std::cout << "Process \"" << tmp->key << "\" was moved from Blocked (iodev=" << unblockEvent - 3 << ") to Ready." << std::endl;
+        std::cout << "Process \"" << tmp->key << "\" moved from Blocked (iodev=" << unblockEvent - 3 << ") to Ready." << std::endl;
     }
 
     return 1;
@@ -183,7 +183,7 @@ int Dispatcher_t::query(std::string pid)
 int Dispatcher_t::release(int ticks)
 {
     if (stateQueue[RUNNING].head == nullptr) {
-        std::cout << "No process is currently running." << std::endl;
+        std::cout << "No process is currently Running." << std::endl;
         return 0;
     }
 
@@ -195,7 +195,7 @@ int Dispatcher_t::release(int ticks)
     tmp->value->lastRun = ticks;
     stateQueue[EXIT].add(tmp);
 
-    std::cout << "Process \"" << tmp->key << " was moved from Running to Exit." << std::endl;
+    std::cout << "Process \"" << tmp->key << "\" moved from Running to Exit." << std::endl;
 
     return 32;
 }

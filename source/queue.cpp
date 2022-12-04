@@ -44,7 +44,8 @@ void Queue_t::add(Node_t *newNode)
     }
 
     Node_t* tmp = head;
-    Node_t* tmpNext = head->queueNext;
+    Node_t* tmpPrev = nullptr;
+    Node_t* tmpNext = tmp->queueNext;
 
     while (tmpNext != nullptr) {
         if (tmpNext->value->lastRun > newNode->value->lastRun) {
@@ -53,12 +54,27 @@ void Queue_t::add(Node_t *newNode)
             return;
         }
 
+        tmpPrev = tmp;
         tmp = tmpNext;
         tmpNext = tmpNext->queueNext;
     }
 
-    tmp->queueNext = newNode;
-    newNode->queueNext = tmpNext;    //nullptr
+    if (tmp->value->lastRun < newNode->value->lastRun) {    //added to the end of the queue
+        tmp->queueNext = newNode;
+        newNode->queueNext = tmpNext;    //nullptr
+        tail = newNode;
+        return;
+    }
+
+    if (tmpPrev == nullptr) {
+        newNode->queueNext = head->queueNext;
+        head = newNode;
+    }
+
+    tmpPrev = newNode;
+    newNode->queueNext = tmp;
+
+    return;
 }
 
 /*
@@ -75,4 +91,18 @@ Node_t* Queue_t::remove()
     }
 
     return tmp;
+}
+
+void Queue_t::print()
+{
+    Node_t* tmp = head;
+    int i = 0;
+
+    while (tmp != nullptr) {
+        std::cout << i << tmp->value->pid << std::endl;
+        tmp = tmp->queueNext;
+        i++;
+    }
+
+    return;
 }

@@ -39,8 +39,9 @@ HashTable_t::~HashTable_t()
 int HashTable_t::hash(std::string key)
 {
     int index = 0;
+    int keyLength = key.size();
 
-    for (int i = 0; i < key.size(); i++) {
+    for (int i = 0; i < keyLength; i++) {
         index += key[i];
         index += i;
     }
@@ -92,6 +93,10 @@ void HashTable_t::remove(Node_t* deleteNode)
     int index = hash(key);
 
     table[index]->remove(key);
+
+    if (table[index]->head == nullptr) {
+        table[index] = nullptr;
+    }
 }
 
 /*
@@ -104,12 +109,17 @@ void HashTable_t::print(std::string pid)
     bool exists = false;
     int index = hash(pid);
 
-    exists = table[index]->print(pid);
+    if (table[index] != nullptr)
+        exists = table[index]->find(pid);
 
     if (exists == false) {
-        //throw exception?
+        std::cout << "Process \"" << pid << "\" not found." << std::endl;
         return;
     }
+
+    table[index]->print(pid);
+
+    return;
 }
 
 /*
@@ -119,9 +129,19 @@ void HashTable_t::print(std::string pid)
  */
 void HashTable_t::print_all()
 {
+    bool exists = false;
+
     for (int i = 0; i < TABLE_SIZE; i++) {
-        if (table[i] != NULL) {
+        if (table[i] != nullptr) {
+            exists = true;
+
             table[i]->print_all();
         }
     }
+
+    if (exists == false) {
+        std::cout << "No processes were found." << std::endl;
+    }
+
+    return;
 }

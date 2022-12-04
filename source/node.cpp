@@ -3,7 +3,7 @@
  *
  */
 
-#include <string>
+#include <string>   //std::string
 
 #include "../header/node.h"
 #include "../header/process.h"
