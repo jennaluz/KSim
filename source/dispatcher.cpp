@@ -21,7 +21,7 @@
 int Dispatcher_t::add(int ticks, std::string pid)
 {
     if (processTable.find(pid) == true) {
-        std::cout << "Process name \"" << pid << "\" is already being hosted." << std::endl;
+        std::cout << "Process named \"" << pid << "\" is already being hosted." << std::endl;
         return 0;
     }
 
