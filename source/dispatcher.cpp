@@ -92,9 +92,11 @@ int Dispatcher_t::step(int ticks)
         stateQueue[RUNNING].add(tmp);
 
         std::cout << "Process \"" << tmp->key << "\" moved from Ready to Running." << std::endl;
+
+        return 256;
     }
 
-    return 256;
+    return 1;
 }
 
 /*
@@ -102,7 +104,7 @@ int Dispatcher_t::step(int ticks)
  */
 int Dispatcher_t::wait(int ticks, std::string ioEvent)
 {
-    if (ioEvent.size() != 1) {
+    if ((ioEvent.size() != 1) || (stoi(ioEvent) > 3)) {
         std::cout << "Invalid IO event number." << std::endl;
         return 0;
     }
@@ -133,7 +135,7 @@ int Dispatcher_t::wait(int ticks, std::string ioEvent)
  */
 int Dispatcher_t::io_event(std::string ioEvent)
 {
-    if (ioEvent.size() != 1) {
+    if ((ioEvent.size() != 1) || (stoi(ioEvent) > 3)) {
         std::cout << "Invalid IO event number." << std::endl;
         return 1;
     }
