@@ -46,7 +46,7 @@ int Dispatcher_t::step(int ticks)
         tmp = stateQueue[EXIT].remove();
         processTable.remove(tmp);
         std::cout << "Process \"" << tmp->key << "\" is banished to the void." << std::endl;
-        delete tmp;
+        //delete tmp;
     }
 
         //move the process with the oldest creation date from the NEW to the READY queue
