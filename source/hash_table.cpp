@@ -17,6 +17,7 @@
 /*constructor*/
 HashTable_t::HashTable_t()
 {
+    std::cout << "constructing hash table..." << std::endl;
     for (int i = 0; i < TABLE_SIZE; i++) {
         table[i] = nullptr;
     }
@@ -25,6 +26,7 @@ HashTable_t::HashTable_t()
 /*destructor*/
 HashTable_t::~HashTable_t()
 {
+    std::cout << "destructing hash table..." << std::endl;
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table[i] != nullptr) {
             delete table[i];
@@ -95,6 +97,7 @@ void HashTable_t::remove(Node_t* deleteNode)
     table[index]->remove(key);
 
     if (table[index]->head == nullptr) {
+        delete table[index];
         table[index] = nullptr;
     }
 }

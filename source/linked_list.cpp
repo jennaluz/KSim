@@ -20,8 +20,14 @@ LinkedList_t::LinkedList_t()
 /*constructor*/
 LinkedList_t::LinkedList_t(Node_t *element)
 {
+    std::cout << "constructing linked list..." << std::endl;
     head = element;
     tail = element;
+}
+
+LinkedList_t::~LinkedList_t()
+{
+    std::cout << "destructing linked list..." << std::endl;
 }
 
 /*

@@ -15,4 +15,5 @@ struct Process_t {
     std::string state;
         //constructor
     Process_t(int ticks, std::string pid);
+    ~Process_t();
 };

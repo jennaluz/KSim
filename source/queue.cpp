@@ -12,6 +12,7 @@
 /*constructor*/
 Queue_t::Queue_t()
 {
+    std::cout << "constructing queue..." << std::endl;
     head = nullptr;
     tail = nullptr;
 }
@@ -19,6 +20,7 @@ Queue_t::Queue_t()
 /*destructor*/
 Queue_t::~Queue_t()
 {
+    std::cout << "destructing queue..." << std::endl;
     Node_t* tmpPrev = nullptr;
 
     while (head != nullptr) {
