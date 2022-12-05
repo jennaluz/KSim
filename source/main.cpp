@@ -1,12 +1,15 @@
 /*
- * source/main.cpp
+ * /home/pura0273/homework/04/source/main.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
- *
+ * gets user input and tokenizes it.
+ * if valid, performs user commands by interacting with Dispatcher_t object.
  */
 
 #include <iostream> //std::cout     std::endl
 #include <string>   //std::string
-#include <vector>   //std::vector   .size()
+#include <vector>   //std::vector   .size()     .clear()
 
 #include "../header/dispatcher.h"
 #include "../header/get_input.h"
@@ -20,7 +23,7 @@ int main()
     std::vector<std::string> bufferArgv;    //tokenized user commands
     int bufferArgc = 0;                     //amount of user commands
 
-    std::string opcodes[7] {
+    std::string opcodes[7] {    //string array all opcodes
         "exit",
         "add",
         "step",
@@ -31,10 +34,13 @@ int main()
     };
 
     while (1) {
+            //get user input
         get_input(ticks, buffer);
 
+            //tokenize user input
         tokenize(buffer, bufferArgv, bufferArgc);
 
+            //attempt to perform user command
         std::string opcode = bufferArgv[0];
         int idxOpcodes = -1;
 

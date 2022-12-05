@@ -1,9 +1,12 @@
 /*
- * source/node.cpp
+ * /home/pura0273/homework/04/source/node.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
+ * constructs and destructs Node_t objects.
+ * points to Process_t object and is used to access Process_t information.
  */
 
-#include <iostream>
 #include <string>   //std::string
 
 #include "../header/node.h"
@@ -12,7 +15,6 @@
 /*constructor*/
 Node_t::Node_t(std::string key, Process_t *value)
 {
-    std::cout << "constructing " << key << " node..." << std::endl;
     this->key = key;
     this->value = value;
     this->queueNext = nullptr;
@@ -22,6 +24,5 @@ Node_t::Node_t(std::string key, Process_t *value)
 /*destructor*/
 Node_t::~Node_t()
 {
-    std::cout << "destructing " << this-> key << " node..." << std::endl;
     delete this->value;
 }

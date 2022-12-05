@@ -1,7 +1,14 @@
 /*
- * header/hash_table.h
+ * /home/pura0273/homework/04/header/hash_table.h
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
- * header file for HashTable_t structure.
+ * header file for HashTable_t structure in ../source/hash_table.cpp.
+ *
+ * implements an unordered map from scratch.
+ * hashes a key based on its ascii value and its index in the key.
+ * adds, removes, searches, and prints the HashTable_t, asking individual
+ *  LinkedList_t objects to compute and return information at times.
  */
 
 #pragma once

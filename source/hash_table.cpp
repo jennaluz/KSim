@@ -1,10 +1,15 @@
 /*
- * source/hash_table.cpp
+ * /home/pura0273/homework/04/source/hash_table.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
- *
+ * implements an unordered map from scratch.
+ * hashes a key based on its ascii value and its index in the key.
+ * adds, removes, searches, and prints the HashTable_t, asking individual
+ *  LinkedList_t objects to compute and return information at times.
  */
 
-#include <iostream>
+#include <iostream> //std::cout     std::endl
 #include <string>   //std::string   .size()     strcmp()
 
 #include "../header/hash_table.h"
@@ -17,7 +22,7 @@
 /*constructor*/
 HashTable_t::HashTable_t()
 {
-    std::cout << "constructing hash table..." << std::endl;
+        //set all elements to nullptr
     for (int i = 0; i < TABLE_SIZE; i++) {
         table[i] = nullptr;
     }
@@ -26,7 +31,7 @@ HashTable_t::HashTable_t()
 /*destructor*/
 HashTable_t::~HashTable_t()
 {
-    std::cout << "destructing hash table..." << std::endl;
+        //deallocate all memory
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table[i] != nullptr) {
             delete table[i];
@@ -35,7 +40,6 @@ HashTable_t::~HashTable_t()
 }
 
 /*
- * called by Dispatcher_t add() method.
  * hashes a string and returns an index into the hash table.
  */
 int HashTable_t::hash(std::string key)
@@ -70,7 +74,6 @@ bool HashTable_t::find(std::string key)
 }
 
 /*
- * called by Dispatcher_t add() method.
  * adds a process that currently does not exist into hash table.
  * if table index already has a node object, then will add new process into its
  *  linked list alphabetically.
@@ -89,6 +92,8 @@ void HashTable_t::add(Node_t *newNode)
     return;
 }
 
+/* removes the first element in the hash table.
+ */
 void HashTable_t::remove(Node_t* deleteNode)
 {
     std::string key = deleteNode->key;
@@ -103,7 +108,6 @@ void HashTable_t::remove(Node_t* deleteNode)
 }
 
 /*
- * called by Dispatcher_t query() method.
  * prints the pid and state of the value corresponding to the passed
  *  key parameter.
  */
@@ -126,7 +130,6 @@ void HashTable_t::print(std::string pid)
 }
 
 /*
- * called by Dispatcher_t query() method.
  * prints all of the pid and state of the value corresponding to the passed
  *  key parameter.
  */
@@ -143,7 +146,7 @@ void HashTable_t::print_all()
     }
 
     if (exists == false) {
-        std::cout << "No processes were found." << std::endl;
+        std::cout << "No processes are being hosted." << std::endl;
     }
 
     return;

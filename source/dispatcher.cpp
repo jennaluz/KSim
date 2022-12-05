@@ -1,10 +1,14 @@
 /*
- * source/dispatcher.cpp
+ * /home/pura0273/homework/04/source/dispatcher.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
+ * orchestrates the addition, removal, and shuffling of processes within
+ *  each state Queue_t and the HashTable_t process table.
  */
 
-#include <iostream>
-#include <string>   //std::string   .size() std::to_string
+#include <iostream> //std::cout     std::endl
+#include <string>   //std::string   .size() std::to_string  stoi()
 
 #include "../header/dispatcher.h"
 #include "../header/hash_table.h"
@@ -17,9 +21,12 @@
  * checks if a process exists.
  * creates a new process if it doesn't, and handles an error exception if it does.
  * adds a new process to the NEW queue as well as the processTable.
+ * consumes 32 ticks if a new process is added.
+ *  consumes 0 ticks if process is currently hosted.
  */
 int Dispatcher_t::add(int ticks, std::string pid)
 {
+        //checks if process already exists
     if (processTable.find(pid) == true) {
         std::cout << "Process named \"" << pid << "\" is already being hosted." << std::endl;
         return 0;
@@ -35,7 +42,16 @@ int Dispatcher_t::add(int ticks, std::string pid)
 }
 
 /*
- *
+ * removes from system all processes in the EXIT queue.
+ * advances at most one process in the NEW queue to the READY queue.
+ * advances at most one process in each BLOCKED_X queue to the READY queue if
+ *  that any processes were waiting for 1024 ticks or more.
+ * removes, if any, process in the RUNNING queue and places it in the READY queue.
+ * dispatches, if any, the process that was waiting the longest from the READY
+ *  queue to the RUNNING queue.
+ * consumes 256 ticks if a process was dispatched from the READY queue to the
+ *  RUNNING queue.
+ *  else, consumes 1 tick.
  */
 int Dispatcher_t::step(int ticks)
 {
@@ -45,6 +61,7 @@ int Dispatcher_t::step(int ticks)
     while (stateQueue[EXIT].head != nullptr) {
         tmp = stateQueue[EXIT].remove();
         processTable.remove(tmp);
+
         std::cout << "Process \"" << tmp->key << "\" is banished to the void." << std::endl;
         delete tmp;
     }
@@ -100,15 +117,19 @@ int Dispatcher_t::step(int ticks)
 }
 
 /*
- *
+ * blocks the process in the READY queue on the given IO device.
+ * consumes 1 tick.
+ *  if no process in the READY queue, consumes no ticks.
  */
 int Dispatcher_t::wait(int ticks, std::string ioEvent)
 {
+        //checks for invalid IO device
     if ((ioEvent.size() != 1) || (stoi(ioEvent) > 3)) {
         std::cout << "Invalid IO event number." << std::endl;
         return 0;
     }
 
+        //checks if any process running
     if (stateQueue[RUNNING].head == nullptr) {
         std::cout << "No process is currently running." << std::endl;
         return 0;
@@ -131,10 +152,11 @@ int Dispatcher_t::wait(int ticks, std::string ioEvent)
 /*
  * simulates that specified io-device X is ready.
  * moves all processes waiting on the event from BLOCKED_X queue to READY queue.
- * 1 tick passes.
+ * consumed 1 ticks.
  */
 int Dispatcher_t::io_event(std::string ioEvent)
 {
+        //checks for invalid IO device
     if ((ioEvent.size() != 1) || (stoi(ioEvent) > 3)) {
         std::cout << "Invalid IO event number." << std::endl;
         return 1;
@@ -143,6 +165,7 @@ int Dispatcher_t::io_event(std::string ioEvent)
     Node_t* tmp = nullptr;
     State_e unblockEvent = State_e(stoi(ioEvent) + 3);
 
+        //checks if any processes waiting on device
     if (stateQueue[unblockEvent].head == nullptr) {
         std::cout << "No processes are waiting on device " << unblockEvent - 3 << "." << std::endl;
         return 1;
@@ -163,7 +186,7 @@ int Dispatcher_t::io_event(std::string ioEvent)
 /*
  * prints the pid and state of the user-specified process.
  * if user enters "query all" then all processes are printed.
- * no ticks pass.
+ * consumes no ticks.
  */
 int Dispatcher_t::query(std::string pid)
 {
@@ -179,11 +202,12 @@ int Dispatcher_t::query(std::string pid)
 
 /*
  * moves the currently running process from the RUNNING queue to the EXIT queue.
- * if no processes are currently running, no ticks will pass.
- *  otherwise, 32 ticks are passed.
+ * if no processes are currently running, consumed no ticks.
+ *  otherwise, consumed 32 ticks.
  */
 int Dispatcher_t::release(int ticks)
 {
+        //checks if any process running
     if (stateQueue[RUNNING].head == nullptr) {
         std::cout << "No process is currently Running." << std::endl;
         return 0;

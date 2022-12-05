@@ -1,9 +1,12 @@
 /*
- * source/queue.cpp
+ * /home/pura0273/homework/04/source/queue.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
+ * essentially a LinkedList_t but with different methods.
+ * points to a series of Node_t objects in a particular state, in the order of
+ *  when they should be removed.
  */
-
-#include <iostream>
 
 #include "../header/queue.h"
 #include "../header/node.h"
@@ -12,7 +15,6 @@
 /*constructor*/
 Queue_t::Queue_t()
 {
-    std::cout << "constructing queue..." << std::endl;
     head = nullptr;
     tail = nullptr;
 }
@@ -20,7 +22,6 @@ Queue_t::Queue_t()
 /*destructor*/
 Queue_t::~Queue_t()
 {
-    std::cout << "destructing queue..." << std::endl;
     Node_t* tmpPrev = nullptr;
 
     while (head != nullptr) {
@@ -34,8 +35,8 @@ Queue_t::~Queue_t()
 }
 
 /*
- * called by Dispatcher_t add() method.
- * adds a new element to the end of stateQueue[NEW].
+ * adds a new element to Queue_t in ascending order of the Process_t lastRun
+ *  data member.
  */
 void Queue_t::add(Node_t *newNode)
 {
@@ -93,18 +94,4 @@ Node_t* Queue_t::remove()
     }
 
     return tmp;
-}
-
-void Queue_t::print()
-{
-    Node_t* tmp = head;
-    int i = 0;
-
-    while (tmp != nullptr) {
-        std::cout << i << tmp->value->pid << std::endl;
-        tmp = tmp->queueNext;
-        i++;
-    }
-
-    return;
 }

@@ -1,7 +1,12 @@
 /*
- * header/dispatcher.h
+ * /home/pura0273/homework/04/header/dispatcher.h
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
- * header file for Dispatcher_t class.
+ * header file for Dispatcher_t class in ../source/dispatcher.cpp.
+ *
+ * orchestrates the addition, removal, and shuffling of processes within
+ *  each state Queue_t and the HashTable_t process table.
  */
 
 #pragma once

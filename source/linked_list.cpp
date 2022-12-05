@@ -1,7 +1,12 @@
 /*
- * source/linked_list.cpp
+ * /home/pura0273/homework/04/source/linked_list.cpp
+ * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
+ * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
- *
+ * part of the hash table implementation.
+ * points to a node at a particular index in the hash table.
+ * in collision cases, a linked list of multiple Node_t objects at a particular index.
+ * add, removes, searches, and prints Node_t information.
  */
 
 #include <iostream> //std::cout     std::endl
@@ -11,23 +16,10 @@
 #include "../header/node.h"
 
 /*constructor*/
-LinkedList_t::LinkedList_t()
-{
-    head = nullptr;
-    tail = nullptr;
-}
-
-/*constructor*/
 LinkedList_t::LinkedList_t(Node_t *element)
 {
-    std::cout << "constructing linked list..." << std::endl;
     head = element;
     tail = element;
-}
-
-LinkedList_t::~LinkedList_t()
-{
-    std::cout << "destructing linked list..." << std::endl;
 }
 
 /*
