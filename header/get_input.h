@@ -1,5 +1,5 @@
 /*
- * /home/pura0273/homework/04/header/get_input.h
+ * ksim/header/get_input.h
  * cs-240.wilder..........g++ -std=c++11..........jenna-luz pura
  * december 4, 2022.......pura0273@vandals.uidaho.edu
  *
