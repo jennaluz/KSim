@@ -1,8 +1,8 @@
 # KSim
-Uses Make and C++ to simulate the kernel of an operating system. "Processes" are moved between different states based on the Five State Model.
+Uses Make and C++ to simulate the kernel of an operating system. "Processes" are moved between different states based on the Five State Process Model.
 
 ## Overview
-### Five State Model
+### Five State Process Model
 Processes can be of the state `New`, `Ready`, `Running`, `Blocked`, or `Exit`.
 
 ### Commands
