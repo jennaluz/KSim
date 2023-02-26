@@ -45,7 +45,7 @@ The following commands shuffle processes between the different states. Each comm
 
 ## Improvements
 ### System Ticks
-The current stystem tick is represented by a nine-digit integer. If the system goes over `999,999,999` ticks, the ticks will simply rollover to `000000000`.
+The current stystem tick is represented by a nine-digit integer. If the system goes over `999999999` ticks, the ticks will simply rollover to `000000000`.
 
 ### Process Priority
 All processes are running at the same priority. Currently, a round-robin technique is used when dispatching the process.
