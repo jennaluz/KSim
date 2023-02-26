@@ -2,7 +2,7 @@
 Uses Make and C++ to simulate the kernel of an operating system. "Processes" are moved between different states based on the Five State Process Model.
 
 ## Installation
-Instead of cloning this repository, <a href="docs/KSim.zip?raw=true" download>click here</a> to download `KSim.zip`, otherwise found in [docs](docs).
+<a href="docs/KSim.zip?raw=true" download>Click here</a> to download `KSim.zip`, otherwise found in [docs](docs).
 
 Use `make` to build the executable.
 
