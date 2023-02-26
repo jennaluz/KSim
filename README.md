@@ -4,7 +4,7 @@ Uses Make and C++ to simulate the kernel of an operating system. "Processes" are
 ## Installation
 Instead of cloning this repository, [click here](docs/KSim.zip "download") to download `KSim.zip`, otherwise found in [docs](docs).
 
-<a href="docs/KSim.zip" download>click here</a>
+<a href="docs/KSim.zip?raw=true" download>click here</a>
 
 Use `make` to build the executable.
 
