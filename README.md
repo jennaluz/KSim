@@ -3,12 +3,12 @@ Uses Make and C++ to simulate the kernel of an operating system. "Processes" are
 
 ## Quick Start
 1. Enter the following command in your terminal to clone this repository
-- Using HTTP
+- using HTTP
 ```
 git clone https://github.com/jennaluz/KSim.git
 ```
 
-- Using SSH
+- using SSH
 ```
 git clone git@github.com:jennaluz/KSim.git
 ```
