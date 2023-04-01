@@ -13,7 +13,7 @@ Use `make run` to run the executable.
 Processes can be of the state `New`, `Ready`, `Running`, `Blocked`, or `Exit`.
 
 ### Commands
-The following commands shuffle processes between the different states. Each command consumes a certain amount of system ticks. Quotes "" are artifacts of the command definition. Do not include them when executing commands. See [](KSim User Manual) for more details about these commands.
+The following commands shuffle processes between the different states. Each command consumes a certain amount of system ticks. Quotes "" are artifacts of the command definition. Do not include them when executing commands.
 - __add "process-name"__
   - Adds process of the name "process-name"
   - 32 ticks on success; 0 ticks on failure
