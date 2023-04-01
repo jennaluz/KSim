@@ -2,7 +2,7 @@
 Uses Make and C++ to simulate the kernel of an operating system. "Processes" are moved between different states based on the Five State Process Model.
 
 ## Quick Start
-1. Enter the following command in your terminal to clone
+1. Enter the following command in your terminal to clone this repository
 - Using HTTP
 ```
 git clone https://github.com/jennaluz/KSim.git
