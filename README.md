@@ -1,12 +1,27 @@
 # KSim
 Uses Make and C++ to simulate the kernel of an operating system. "Processes" are moved between different states based on the Five State Process Model.
 
-## Installation
-<a href="docs/KSim.zip?raw=true" download>Click here</a> to download `KSim.zip`, otherwise found in [docs](docs).
+## Quick Start
+1. Enter the following command in your terminal to clone
+- Using HTTP
+```
+git clone https://github.com/jennaluz/KSim.git
+```
 
-Use `make` to build the executable.
+- Using SSH
+```
+git clone git@github.com:jennaluz/KSim.git
+```
 
-Use `make run` to run the executable.
+2. Build the executable using the following command
+```
+make
+```
+
+3. Run the executable using the following command
+```
+make run
+```
 
 ## Overview
 ### Five State Process Model
